@@ -90,7 +90,7 @@ Always output as a fenced code block with `#` comments explaining each section.
 # Indie Rock Feed
 # Generated for goodgooddog bulk import
 
-# Keywords
+# Keywords — core indie-rock terms + key press
 "indie rock"
 "indie pop"
 shoegaze
@@ -100,13 +100,13 @@ postpunk
 ^Pitchfork
 "album review"
 
-# Hashtags
+# Hashtags — likely tags (some may be quiet)
 #indierock
 #shoegaze
 #dreampop
 #newmusic
 
-# Exclusions
+# Exclusions — resale / merch noise
 -"concert tickets"
 -"for sale"
 -"buy now"
@@ -143,7 +143,7 @@ opinion
 "what do you think"
 thread
 
-# Exclusions (global)
+# Exclusions (global) — resale + spam
 -"concert tickets"
 -"for sale"
 -@spambot.bsky.social
@@ -152,6 +152,8 @@ thread
 !no-replies
 !lang:en
 ```
+
+Keep section-header comments short and intent-naming (e.g. `# Exclusions — resale noise`). The fuller "what I included and why" belongs in chat, not in the pasteable block — keep the paste clean.
 
 ## After Generating
 
@@ -170,11 +172,13 @@ Scan the output for obvious gaps before presenting it. Proactively suggest impro
 - If the topic is inherently visual (photography, art, film, memes), suggest `!images-only` or `!videos-only` — but only when the user wants media-only; these hard-narrow the feed.
 - If the feed should stay family-friendly or workplace-safe, suggest `!no-adult`.
 
-Then offer these refinement options:
-- **Add/remove** specific terms
-- **Tighten** (more exclusions, narrower scope) or **broaden** (more keywords, related hashtags)
-- **Add groups** for intersection logic
-- **Finalize** — confirm it's ready to paste
+After presenting the block, give a one-or-two-line "here's what I included and why" summary in chat, then offer **concrete, topic-specific next moves** — instantiate the options for this feed rather than listing them abstractly. For a jazz feed that might be:
+- "Add the fusion / jazz-funk lane?"
+- "Tighten to discussion-only (reviews, interviews, threads)?"
+- "Add a `!no-replies` setting to cut reply chatter?"
+- "Looks right — ready to paste?"
+
+The underlying moves are always: add/remove terms, tighten (more exclusions / narrower scope) or broaden, add groups for intersection logic, or finalize. Phrase them as specific suggestions for the current topic, not a generic menu.
 
 ## Quality Checklist
 
