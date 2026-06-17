@@ -13,27 +13,36 @@ When the skill loads, look at the user's message (or `$ARGUMENTS`, if invoked as
 
 | What the user said | Mode | First action |
 |---------------------|------|--------------|
-| A topic or description ("I want a feed about jazz") | **Describe** | Ask 1 scoping question, then generate a first pass |
-| A list of terms or keywords | **Refine** | Structure the list into proper syntax, suggest additions and exclusions |
+| A topic or description ("I want a feed about jazz") | **Describe** | If the angle is clear, propose a first-pass menu of lanes/terms/exclusions for that topic. If the topic is broad/ambiguous, ask one intent question first (see Interview Process). |
+| A list of terms or keywords | **Refine** | Structure the list into proper syntax, then propose the specific additions and exclusions you'd make for that topic. |
 | Something vague or just "create feed rules" | **Open** | Ask: "What kind of Bluesky feed do you want to create? Describe the topic, paste a rough list of terms, or just tell me the vibe." |
 
 ## Interview Process
 
-Ask questions **one at a time**. Prefer multiple choice when possible. The depth of the interview scales to the complexity of the topic:
+Lead with what you know. You already understand most topics — their sub-areas, key terms, and the noise that pollutes them. Don't ask the user to supply that knowledge; **propose it and let them react.** Ask questions one at a time, prefer multiple choice, and only ask a question if its answer would change the output.
 
-**Narrow topic** (e.g., "posts about Fugazi") → 2-3 questions, then generate.
-**Broad topic** (e.g., "music") → 5+ questions covering subgenres, tone, accounts, exclusions.
+**The flow:**
 
-| Phase | Ask | When |
-|-------|-----|------|
-| **Core** | What's the topic? Who is this feed for? | Always |
-| **Scope** | What should be excluded? What kind of noise do you expect? | Always — exclusions are half the value of a good feed |
-| **Media & safety** | Only posts with images or video? Keep it free of adult content? | Visual/format-specific topics (photos, art, film), or any feed that should stay SFW |
-| **Naming** | What should the feed be called? | Always — suggest a name if the user doesn't offer one |
-| **Tuning** | Tone? Discussion vs. news vs. art? Specific accounts to include? | Only for broad or ambiguous topics |
-| **Structure** | "Should X and Y be separate groups where both must match?" | Only when the user's intent implies intersection logic (see Grouping below) |
+1. **Fix the angle (one intent question, broad topics only).** If the topic is narrow (e.g. "posts about Fugazi"), the angle is already clear — skip to step 2. If it's broad or ambiguous (e.g. "music"), ask exactly one question to pin the heart of the feed. Example: *"What's the heart of this feed — a genre/scene, an activity (gigs, gear, releases), or a vibe?"*
 
-After generating a first pass, always offer an exit: "Here's a first pass. Want me to refine it, or is this ready to paste?"
+2. **Propose a specific menu.** Lead with the actual lanes, terms, and noise-to-cut you'd use for this topic, and ask the user to confirm or narrow. Don't ask "what subgenres?" — name them. Example for jazz:
+
+   > "For a jazz feed I'd pull in **bebop, hard bop, modal, fusion, free jazz, vocal jazz**, plus reviews and interviews. I'd cut smooth-jazz / elevator-music noise and gear-for-sale spam. Want all those lanes, or focus a few?"
+
+3. **Generate a first pass, then offer an exit.** After the menu is confirmed (or immediately, for narrow topics), generate. Always close with: "Here's a first pass. Want me to refine it, or is this ready to paste?"
+
+**What to cover — propose, don't interrogate.** Each row below is something you *offer*, scaled to topic complexity. A narrow topic touches 2-3 rows; a broad one touches more.
+
+| Phase | What you do | When |
+|-------|-------------|------|
+| **Intent** | Ask the single angle question above. | Broad/ambiguous topics only |
+| **Scope & exclusions** | *Name* the noise you expect for this specific topic ("for a film feed, I'd cut showtimes/ticket spam and streaming-deal posts") and ask the user to confirm or add. | Always — exclusions are half the value of a good feed |
+| **Media & safety** | Suggest `!images-only` / `!videos-only` for inherently visual topics, and `!no-adult` for feeds that should stay SFW — as a proposal, not an open question. | Visual/format topics, or any feed that should stay SFW |
+| **Naming** | Suggest a concrete name; don't just ask for one. | Always |
+| **Tuning** | Propose a slant (discussion vs. news vs. art) if the topic is broad, and name 1-2 well-known accounts if you're confident they're real (see confidence rules under After Generating). | Broad or ambiguous topics |
+| **Structure** | If the user's intent implies intersection ("X *that are also* Y"), propose splitting into groups (see Grouping). | Only when intent implies intersection |
+
+Do not ask standalone questions that don't change the output (e.g. a generic "who is this feed for?" with no follow-on effect). If audience matters, fold it into the menu ("aimed at newcomers, so I'd keep terms broad — sound right?").
 
 ## Shorthand Syntax Reference
 
