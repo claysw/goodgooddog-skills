@@ -188,8 +188,9 @@ Before presenting the final output, verify:
 3. There are at least 2-3 exclusion rules (every topic has noise)
 4. The keyword count is 10-20 — quality over quantity
 5. Specific terms are preferred over generic ones
-6. No `@handles` are suggested unless you're confident they exist on Bluesky (when in doubt, leave them out)
+6. Any suggested `@handles` are clearly-real public figures/orgs AND carry a "verify this handle exists on Bluesky" caveat — no fabricated or guessed handles
 7. The feed has a name in the first comment line
+8. Suggestions (terms, exclusions, hashtags) are specific to this topic — no generic filler like "every topic has noise"
 
 ## Constraints
 
