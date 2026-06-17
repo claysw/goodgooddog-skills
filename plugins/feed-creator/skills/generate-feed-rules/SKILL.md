@@ -155,12 +155,20 @@ thread
 
 ## After Generating
 
-Scan the output for obvious gaps before presenting it. Proactively suggest improvements:
-- If no hashtags are included, suggest relevant ones ("Bluesky users often tag posts with #jazz — want me to add hashtag rules?")
-- If exclusions feel thin, suggest common noise patterns for that topic
-- If the topic is broad, ask whether the scope should be tightened
-- If the topic is inherently visual (photography, art, film, memes), suggest `!images-only` or `!videos-only` — but only when the user wants media-only; these hard-narrow the feed
-- If the feed should stay family-friendly or workplace-safe, suggest `!no-adult`
+### How confident to be
+
+Your knowledge is reliable for some suggestion types and not others. Calibrate:
+
+- **Keywords, phrases, subgenres, key terms** — suggest freely and specifically. This is your strong suit; be generous and concrete (name the actual sub-areas and signal words for the topic).
+- **`@handles`** — only suggest clearly-real, well-known public figures or organizations, and **always flag them**: "double-check this handle exists on Bluesky." Never invent plausible-looking handles. When unsure, leave them out.
+- **`#hashtags`** — suggest them, but note they may not all be active on Bluesky ("these are likely tags — some may be quiet").
+
+Scan the output for obvious gaps before presenting it. Proactively suggest improvements, and make them specific to *this* topic rather than generic:
+- If no hashtags are included, suggest the likely tags for the topic ("Bluesky users tag these #jazz / #jazzmusic — want them in?"), noting some may be quiet.
+- If exclusions feel thin, *name* the noise pattern unique to this subject ("art feeds get flooded with print-shop/Redbubble promos — want those cut?") rather than saying "every topic has noise."
+- If the topic is broad, propose a specific way to tighten it (a sub-lane to focus on), not just "want to narrow?".
+- If the topic is inherently visual (photography, art, film, memes), suggest `!images-only` or `!videos-only` — but only when the user wants media-only; these hard-narrow the feed.
+- If the feed should stay family-friendly or workplace-safe, suggest `!no-adult`.
 
 Then offer these refinement options:
 - **Add/remove** specific terms
