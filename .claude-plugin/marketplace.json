@@ -1,0 +1,12 @@
+{
+  "name": "goodgooddog",
+  "owner": { "name": "Clay Wiedemann" },
+  "description": "Skills for goodgooddog — build and tune custom Bluesky feeds.",
+  "plugins": [
+    {
+      "name": "feed-creator",
+      "source": "./plugins/feed-creator",
+      "description": "Generate goodgooddog feed rules from a conversational interview."
+    }
+  ]
+}
