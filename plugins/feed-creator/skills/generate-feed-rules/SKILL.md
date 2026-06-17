@@ -13,27 +13,36 @@ When the skill loads, look at the user's message (or `$ARGUMENTS`, if invoked as
 
 | What the user said | Mode | First action |
 |---------------------|------|--------------|
-| A topic or description ("I want a feed about jazz") | **Describe** | Ask 1 scoping question, then generate a first pass |
-| A list of terms or keywords | **Refine** | Structure the list into proper syntax, suggest additions and exclusions |
+| A topic or description ("I want a feed about jazz") | **Describe** | If the angle is clear, propose a first-pass menu of lanes/terms/exclusions for that topic. If the topic is broad/ambiguous, ask one intent question first (see Interview Process). |
+| A list of terms or keywords | **Refine** | Structure the list into proper syntax, then propose the specific additions and exclusions you'd make for that topic. |
 | Something vague or just "create feed rules" | **Open** | Ask: "What kind of Bluesky feed do you want to create? Describe the topic, paste a rough list of terms, or just tell me the vibe." |
 
 ## Interview Process
 
-Ask questions **one at a time**. Prefer multiple choice when possible. The depth of the interview scales to the complexity of the topic:
+Lead with what you know. You already understand most topics — their sub-areas, key terms, and the noise that pollutes them. Don't ask the user to supply that knowledge; **propose it and let them react.** Ask questions one at a time, prefer multiple choice, and only ask a question if its answer would change the output.
 
-**Narrow topic** (e.g., "posts about Fugazi") → 2-3 questions, then generate.
-**Broad topic** (e.g., "music") → 5+ questions covering subgenres, tone, accounts, exclusions.
+**The flow:**
 
-| Phase | Ask | When |
-|-------|-----|------|
-| **Core** | What's the topic? Who is this feed for? | Always |
-| **Scope** | What should be excluded? What kind of noise do you expect? | Always — exclusions are half the value of a good feed |
-| **Media & safety** | Only posts with images or video? Keep it free of adult content? | Visual/format-specific topics (photos, art, film), or any feed that should stay SFW |
-| **Naming** | What should the feed be called? | Always — suggest a name if the user doesn't offer one |
-| **Tuning** | Tone? Discussion vs. news vs. art? Specific accounts to include? | Only for broad or ambiguous topics |
-| **Structure** | "Should X and Y be separate groups where both must match?" | Only when the user's intent implies intersection logic (see Grouping below) |
+1. **Fix the angle (one intent question, broad topics only).** If the topic is narrow (e.g. "posts about Fugazi"), the angle is already clear — skip to step 2. If it's broad or ambiguous (e.g. "music"), ask exactly one question to pin the heart of the feed. Example: *"What's the heart of this feed — a genre/scene, an activity (gigs, gear, releases), or a vibe?"*
 
-After generating a first pass, always offer an exit: "Here's a first pass. Want me to refine it, or is this ready to paste?"
+2. **Propose a specific menu.** Lead with the actual lanes, terms, and noise-to-cut you'd use for this topic, and ask the user to confirm or narrow. Don't ask "what subgenres?" — name them. Example for jazz:
+
+   > "For a jazz feed I'd pull in **bebop, hard bop, modal, fusion, free jazz, vocal jazz**, plus reviews and interviews. I'd cut smooth-jazz / elevator-music noise and gear-for-sale spam. Want all those lanes, or focus a few?"
+
+3. **Generate a first pass, then offer an exit.** After the menu is confirmed (or immediately, for narrow topics), generate. Always close with: "Here's a first pass. Want me to refine it, or is this ready to paste?"
+
+**What to cover — propose, don't interrogate.** Each row below is something you *offer*, scaled to topic complexity. A narrow topic touches 2-3 rows; a broad one touches more.
+
+| Phase | What you do | When |
+|-------|-------------|------|
+| **Intent** | Ask the single angle question above. | Broad/ambiguous topics only |
+| **Scope & exclusions** | *Name* the noise you expect for this specific topic ("for a film feed, I'd cut showtimes/ticket spam and streaming-deal posts") and ask the user to confirm or add. | Always — exclusions are half the value of a good feed |
+| **Media & safety** | Suggest `!images-only` / `!videos-only` for inherently visual topics, and `!no-adult` for feeds that should stay SFW — as a proposal, not an open question. | Visual/format topics, or any feed that should stay SFW |
+| **Naming** | Suggest a concrete name; don't just ask for one. | Always |
+| **Tuning** | Propose a slant (discussion vs. news vs. art) if the topic is broad, and name 1-2 well-known accounts if you're confident they're real (see confidence rules under After Generating). | Broad or ambiguous topics |
+| **Structure** | If the user's intent implies intersection ("X *that are also* Y"), propose splitting into groups (see Grouping). | Only when intent implies intersection |
+
+Do not ask standalone questions that don't change the output (e.g. a generic "who is this feed for?" with no follow-on effect). If audience matters, fold it into the menu ("aimed at newcomers, so I'd keep terms broad — sound right?").
 
 ## Shorthand Syntax Reference
 
@@ -81,7 +90,7 @@ Always output as a fenced code block with `#` comments explaining each section.
 # Indie Rock Feed
 # Generated for goodgooddog bulk import
 
-# Keywords
+# Keywords — core indie-rock terms + key press
 "indie rock"
 "indie pop"
 shoegaze
@@ -91,13 +100,13 @@ postpunk
 ^Pitchfork
 "album review"
 
-# Hashtags
+# Hashtags — likely tags (some may be quiet)
 #indierock
 #shoegaze
 #dreampop
 #newmusic
 
-# Exclusions
+# Exclusions — resale / merch noise
 -"concert tickets"
 -"for sale"
 -"buy now"
@@ -134,7 +143,7 @@ opinion
 "what do you think"
 thread
 
-# Exclusions (global)
+# Exclusions (global) — resale + spam
 -"concert tickets"
 -"for sale"
 -@spambot.bsky.social
@@ -144,20 +153,32 @@ thread
 !lang:en
 ```
 
+Keep section-header comments short and intent-naming (e.g. `# Exclusions — resale noise`). The fuller "what I included and why" belongs in chat, not in the pasteable block — keep the paste clean.
+
 ## After Generating
 
-Scan the output for obvious gaps before presenting it. Proactively suggest improvements:
-- If no hashtags are included, suggest relevant ones ("Bluesky users often tag posts with #jazz — want me to add hashtag rules?")
-- If exclusions feel thin, suggest common noise patterns for that topic
-- If the topic is broad, ask whether the scope should be tightened
-- If the topic is inherently visual (photography, art, film, memes), suggest `!images-only` or `!videos-only` — but only when the user wants media-only; these hard-narrow the feed
-- If the feed should stay family-friendly or workplace-safe, suggest `!no-adult`
+### How confident to be
 
-Then offer these refinement options:
-- **Add/remove** specific terms
-- **Tighten** (more exclusions, narrower scope) or **broaden** (more keywords, related hashtags)
-- **Add groups** for intersection logic
-- **Finalize** — confirm it's ready to paste
+Your knowledge is reliable for some suggestion types and not others. Calibrate:
+
+- **Keywords, phrases, subgenres, key terms** — suggest freely and specifically. This is your strong suit; be generous and concrete (name the actual sub-areas and signal words for the topic).
+- **`@handles`** — only suggest clearly-real, well-known public figures or organizations, and **always flag them**: "double-check this handle exists on Bluesky." Never invent plausible-looking handles. When unsure, leave them out.
+- **`#hashtags`** — suggest them, but note they may not all be active on Bluesky ("these are likely tags — some may be quiet").
+
+Scan the output for obvious gaps before presenting it. Proactively suggest improvements, and make them specific to *this* topic rather than generic:
+- If no hashtags are included, suggest the likely tags for the topic ("Bluesky users tag these #jazz / #jazzmusic — want them in?"), noting some may be quiet.
+- If exclusions feel thin, *name* the noise pattern unique to this subject ("art feeds get flooded with print-shop/Redbubble promos — want those cut?") rather than saying "every topic has noise."
+- If the topic is broad, propose a specific way to tighten it (a sub-lane to focus on), not just "want to narrow?".
+- If the topic is inherently visual (photography, art, film, memes), suggest `!images-only` or `!videos-only` — but only when the user wants media-only; these hard-narrow the feed.
+- If the feed should stay family-friendly or workplace-safe, suggest `!no-adult`.
+
+After presenting the block, give a one-or-two-line "here's what I included and why" summary in chat, then offer **concrete, topic-specific next moves** — instantiate the options for this feed rather than listing them abstractly. For a jazz feed that might be:
+- "Add the fusion / jazz-funk lane?"
+- "Tighten to discussion-only (reviews, interviews, threads)?"
+- "Add a `!no-replies` setting to cut reply chatter?"
+- "Looks right — ready to paste?"
+
+The underlying moves are always: add/remove terms, tighten (more exclusions / narrower scope) or broaden, add groups for intersection logic, or finalize. Phrase them as specific suggestions for the current topic, not a generic menu.
 
 ## Quality Checklist
 
@@ -167,8 +188,9 @@ Before presenting the final output, verify:
 3. There are at least 2-3 exclusion rules (every topic has noise)
 4. The keyword count is 10-20 — quality over quantity
 5. Specific terms are preferred over generic ones
-6. No `@handles` are suggested unless you're confident they exist on Bluesky (when in doubt, leave them out)
+6. Any suggested `@handles` are clearly-real public figures/orgs AND carry a "verify this handle exists on Bluesky" caveat — no fabricated or guessed handles
 7. The feed has a name in the first comment line
+8. Suggestions (terms, exclusions, hashtags) are specific to this topic — no generic filler like "every topic has noise"
 
 ## Constraints
 

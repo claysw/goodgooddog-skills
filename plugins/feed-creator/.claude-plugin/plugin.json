@@ -1,6 +1,6 @@
 {
   "name": "feed-creator",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Generate goodgooddog feed rules in shorthand syntax from a short interview, ready to paste into the app's bulk import.",
   "author": { "name": "Clay Wiedemann" },
   "homepage": "https://goodgooddog.com",
