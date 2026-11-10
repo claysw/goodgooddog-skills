@@ -1,9 +1,0 @@
-{
-  "name": "commentary-to-figjam",
-  "version": "1.0.1",
-  "description": "Turn a screen recording you talked over into a FigJam board: one screenshot and a ticket-ready note per key moment, then file the notes as tickets when you're ready.",
-  "author": { "name": "Clay Wiedemann" },
-  "repository": "https://github.com/claysw/goodgooddog-skills",
-  "license": "MIT",
-  "keywords": ["figma", "figjam", "screen-recording", "transcription", "feedback", "ux-review", "linear"]
-}
