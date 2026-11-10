@@ -1,12 +1,17 @@
 {
   "name": "goodgooddog",
   "owner": { "name": "Clay Wiedemann" },
-  "description": "Skills for goodgooddog — build and tune custom Bluesky feeds.",
+  "description": "Skills from goodgooddog: build and tune custom Bluesky feeds, and turn app walkthrough recordings into FigJam boards and tickets.",
   "plugins": [
     {
       "name": "feed-creator",
       "source": "./plugins/feed-creator",
       "description": "Generate goodgooddog feed rules from a conversational interview."
+    },
+    {
+      "name": "commentary-to-figjam",
+      "source": "./plugins/commentary-to-figjam",
+      "description": "Turn a screen recording you talked over into a FigJam board with a screenshot and ticket-ready note per key moment."
     }
   ]
 }

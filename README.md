@@ -1,18 +1,20 @@
 # goodgooddog skills
 
-Claude Code skills for [goodgooddog](https://goodgooddog.com) — build and tune custom Bluesky feeds.
+Claude Code skills from [goodgooddog](https://goodgooddog.com): build and tune custom Bluesky feeds, and turn app walkthrough recordings into FigJam boards.
 
-This repository is a Claude Code **plugin marketplace**. Right now it ships one plugin:
+This repository is a Claude Code **plugin marketplace**. It ships two plugins:
 
 | Plugin | Skill | What it does |
 |--------|-------|--------------|
 | `feed-creator` | `generate-feed-rules` | Interviews you about a feed idea, then outputs **shorthand** you paste into goodgooddog's bulk import to create the feed. |
+| `commentary-to-figjam` | `commentary-to-figjam` | Turns a screen recording you talked over into a FigJam board with a screenshot and ticket-ready note per key moment, for any app. See [its README](plugins/commentary-to-figjam/README.md). |
 
 ## Install
 
 ```
 /plugin marketplace add claysw/goodgooddog-skills
 /plugin install feed-creator@goodgooddog
+/plugin install commentary-to-figjam@goodgooddog
 ```
 
 Then invoke it in Claude Code:
@@ -60,8 +62,8 @@ Installed users receive new versions when the plugin's version is bumped. To upd
 
 Updates are delivered **only when the version changes** — pushing commits alone is not enough.
 
-1. Edit `plugins/feed-creator/skills/generate-feed-rules/SKILL.md`.
-2. Bump `version` in `plugins/feed-creator/.claude-plugin/plugin.json` (e.g. `1.0.0` → `1.0.1`).
+1. Edit the plugin's `SKILL.md` under `plugins/<plugin>/skills/`.
+2. Bump `version` in `plugins/<plugin>/.claude-plugin/plugin.json` (e.g. `1.0.0` → `1.0.1`).
 3. Validate: `claude plugin validate .`
 4. Commit and push.
 
