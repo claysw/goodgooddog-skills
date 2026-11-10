@@ -11,7 +11,7 @@ The board is the review step. Edit or delete notes there, explain anything Claud
 - **Claude Code on your own computer.** Cloud sandboxes usually block the screenshot upload to Figma.
 - **The Figma MCP connector**, connected to an account that can create FigJam files.
 - **ffmpeg** and **uv**. On macOS: `brew install ffmpeg uv`.
-- **Apple Silicon** for the fastest transcription (Parakeet on MLX). Other machines fall back to faster-whisper, which is slower but works.
+- **Apple Silicon** for the fastest transcription (Parakeet on MLX). Other machines fall back to faster-whisper, which is slower but works. See [Transcription](#transcription).
 - **For tickets:** a tracker connector, such as Linear. The skill has extra tips for Linear but works with any tracker that has an MCP connector.
 
 ## Install
@@ -34,6 +34,15 @@ With no path, it uses the newest `.mp4` or `.mov` on your Desktop.
 - Talk while you point. "This" and "here" are how Claude finds the right frame, so have the cursor on the thing as you say it.
 - One thought per sentence or two. Claude merges rambles about one thing into one note.
 - A few minutes is plenty. Expect about one note per 30 to 60 seconds of commentary.
+
+## Transcription
+
+You don't install a transcriber yourself. The skill runs one through `uv`, which fetches it the first time:
+
+- **Apple Silicon Macs:** [Parakeet](https://github.com/senstella/parakeet-mlx) on MLX, with Whisper on MLX as a fallback.
+- **Other machines:** [faster-whisper](https://github.com/SYSTRAN/faster-whisper) on the CPU. It's slower but works anywhere.
+
+The first run downloads the model from Hugging Face: about 2.5 GB for Parakeet, less for Whisper. Later runs use the cached copy. If your network blocks huggingface.co, transcription can't start, and Claude says so instead of guessing what you said.
 
 ## Settings
 
